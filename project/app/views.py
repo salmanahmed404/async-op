@@ -20,45 +20,63 @@ def revoke(request, task_id):
     """
     View for revoking file upload
     """
-    task = TaskState.objects.get(task_id=task_id)
-    task.task_status = TaskState.TASK_REVOKED
-    task.save()
-    response_dict = {
-        'task_id': task_id,
-        'state': task.get_task_status_display(),
-        'message': 'File upload stopped'
-    }
-    return Response(response_dict, status=status.HTTP_200_OK)
+    try:
+        task = TaskState.objects.get(task_id=task_id)
+        task.task_status = TaskState.TASK_REVOKED
+        task.save()
+        response_dict = {
+            'task_id': task_id,
+            'state': task.get_task_status_display(),
+            'message': 'Task stopped'
+        }
+        return Response(response_dict, status=status.HTTP_200_OK)
+    except TaskState.DoesNotExist:
+        response_dict = {
+            'message': 'Task not found'
+        }
+        return Response(response_dict, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(http_method_names=['GET'])
 def pause(request, task_id):
     """
     View for pausing file upload
     """
-    task = TaskState.objects.get(task_id=task_id)
-    task.task_status = TaskState.TASK_PAUSED
-    task.save()
-    response_dict = {
-        'task_id': task_id,
-        'state': task.get_task_status_display(),
-        'message': 'File upload paused'
-    }
-    return Response(response_dict, status=status.HTTP_200_OK)
+    try:
+        task = TaskState.objects.get(task_id=task_id)
+        task.task_status = TaskState.TASK_PAUSED
+        task.save()
+        response_dict = {
+            'task_id': task_id,
+            'state': task.get_task_status_display(),
+            'message': 'Task paused'
+        }
+        return Response(response_dict, status=status.HTTP_200_OK)
+    except TaskState.DoesNotExist:
+        response_dict = {
+            'message': 'Task not found'
+        }
+        return Response(response_dict, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(http_method_names=['GET'])
 def resume(request, task_id):
     """
     View for resuming a paused file upload
     """
-    task = TaskState.objects.get(task_id=task_id)
-    task.task_status = TaskState.TASK_RESUMED
-    task.save()
-    response_dict = {
-        'task_id': task_id,
-        'state': task.get_task_status_display(),
-        'message': 'File upload resumed'
-    }
-    return Response(response_dict, status=status.HTTP_200_OK)
+    try:
+        task = TaskState.objects.get(task_id=task_id)
+        task.task_status = TaskState.TASK_RESUMED
+        task.save()
+        response_dict = {
+            'task_id': task_id,
+            'state': task.get_task_status_display(),
+            'message': 'Task resumed'
+        }
+        return Response(response_dict, status=status.HTTP_200_OK)
+    except TaskState.DoesNotExist:
+        response_dict = {
+            'message': 'Task not found'
+        }
+        return Response(response_dict, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(http_method_names=['GET'])
 def csv_export(request):
@@ -75,7 +93,10 @@ def csv_export(request):
         }
         return Response(response_dict, status=status.HTTP_200_OK)
     else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        response_dict = {
+            'message': 'Enter from_date and to_date query params for filtering'
+        }
+        return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
 
 class FileUploadView(GenericAPIView):
     """
