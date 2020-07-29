@@ -62,6 +62,13 @@ def resume(request, task_id):
     """
     try:
         task = TaskState.objects.get(task_id=task_id)
+        if (task.task_status != TaskState.TASK_PAUSED):
+            response_dict = {
+                'task_id': task_id,
+                'state': task.get_task_status_display(),
+                'message': 'Task is not in paused state, cannot be resumed'
+            }
+            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
         task.task_status = TaskState.TASK_RESUMED
         task.save()
         response_dict = {
