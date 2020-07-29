@@ -10,7 +10,7 @@ def create_csv(records):
     Function which creates a csv file with dummy data
     """
     fake = Faker()
-    with open('../data/dummy.csv', 'w', newline='') as dummy_csv:
+    with open('./data/dummy.csv', 'w', newline='') as dummy_csv:
         
         csvwriter = csv.DictWriter(dummy_csv, fieldnames=FIELD_NAMES)
         csvwriter.writeheader()

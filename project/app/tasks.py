@@ -72,7 +72,7 @@ def handle_csv_export(self, from_date, to_date):
         date_recorded__gte=from_date, date_recorded__lte=to_date
     )
     task = TaskState.objects.create(task_id=self.request.id)
-    csvfile = open('../exports/exported_{}.csv'.format(task.task_id), 'w', newline='')
+    csvfile = open('./exports/exported_{}.csv'.format(task.task_id), 'w', newline='')
     fieldnames = [field.name for field in StudentDetail._meta.get_fields()]
     
     #Removing the id field which is not required
@@ -91,7 +91,7 @@ def handle_csv_export(self, from_date, to_date):
 
         if (task.task_status == TaskState.TASK_REVOKED):
             csvfile.close()
-            os.remove('../exports/exported{}.csv'.format(task.task_id))
+            os.remove('./exports/exported_{}.csv'.format(task.task_id))
             raise Ignore
         
         elif (task.task_status == TaskState.TASK_PAUSED):
