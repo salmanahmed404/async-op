@@ -1,1 +1,2 @@
 # atlan-collect-task
+Atlan Collect​ is a data collection platform that is being used by customers in 50+ countries in more than 200 organizations. Its features include team management, multilingual forms, and offline data collection. Atlan Collect has a variety of long-running tasks that require time and resources on the servers. As it stands now, once we have triggered off a long-running task, there is no way to tap into it and pause/stop/terminate the task. The aim was to create RESTful API(s) to solve this problem.
