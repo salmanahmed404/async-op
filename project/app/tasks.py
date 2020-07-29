@@ -72,8 +72,11 @@ def handle_csv_export(self, from_date, to_date):
         date_recorded__gte=from_date, date_recorded__lte=to_date
     )
     task = TaskState.objects.create(task_id=self.request.id)
-    csvfile = open('../exports/exported{}.csv'.format(task.task_id), 'w', newline='')
+    csvfile = open('../exports/exported_{}.csv'.format(task.task_id), 'w', newline='')
     fieldnames = [field.name for field in StudentDetail._meta.get_fields()]
+    
+    #Removing the id field which is not required
+    fieldnames = fieldnames[1:]
     csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
     csvwriter.writeheader()
     
@@ -87,6 +90,7 @@ def handle_csv_export(self, from_date, to_date):
             csvwriter.writerow(instance_dict)
 
         if (task.task_status == TaskState.TASK_REVOKED):
+            csvfile.close()
             os.remove('../exports/exported{}.csv'.format(task.task_id))
             raise Ignore
         
@@ -101,6 +105,12 @@ def handle_csv_export(self, from_date, to_date):
             if (counter == 5):
                 task.task_status = TaskState.TASK_REVOKED
                 task.save()
+            elif (task.task_status == TaskState.TASK_RESUMED):
+                instance_dict = model_to_dict(instance)
+                del instance_dict['task']
+                del instance_dict['id']
+                csvwriter.writerow(instance_dict)
+
     
     csvfile.close()
     return 'File successfully exported'

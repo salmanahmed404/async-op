@@ -113,5 +113,6 @@ migrations
 #media
 media
 
-#data
+#data directories
 data
+exports
