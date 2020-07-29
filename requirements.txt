@@ -4,3 +4,4 @@ Faker==4.1.1
 celery==4.4.6
 redis==3.5.3
 psycopg2==2.8.5
+coreapi==2.3.3
