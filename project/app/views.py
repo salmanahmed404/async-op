@@ -13,8 +13,6 @@ from app.serializers import FileSerializer
 from app.tasks import handle_csv_export, handle_file_upload
 
 
-import pdb
-
 @api_view(http_method_names=['GET'])
 def revoke(request, task_id):
     """
