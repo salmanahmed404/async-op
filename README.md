@@ -39,40 +39,62 @@ Atlan Collect​ is a data collection platform that is being used by customers i
 
 ## Running Locally (Development)
 1. **Clone the repository**
-    `git clone [repository_url]`
+    ```
+    git clone [repository_url]
+    ```
 
 2. **Create and activate virtual environment**
-    `virtualenv --python=python3 venv` (or any name)
-    `source venv/bin/activate`
+    ```
+    virtualenv --python=python3 venv #or any name
+    source venv/bin/activate
+    ``` 
 
 3. **Navigate to project code**
-    `cd project`
+    ```
+    cd project
+    ```
 
 4. **Install packages**
-    `pip install -r requirements.txt`
+    ```
+    pip install -r requirements.txt
+    ```
 
 5. **Database setup**
     - Ensure you have postgres installed otherwise install using package manager
-        `sudo apt-get install postgresql` (for Ubuntu)
+        ```
+        sudo apt-get install postgresql
+        ```
     - Create database under the default postgres user
-        `sudo su postgres`
-        `psql`
-        `CREATE DATABASE atlan_collect;`
+        ```
+        sudo su postgres
+        psql
+        CREATE DATABASE atlan_collect;
+        ```
 
 6. **Run the migrations**
-    `python manage.py migrate
+    ```
+    python manage.py migrate
+    ```
 
 7. **Prepare test data** (optional)
-    `mkdir data`
-    `python generate_dummy_data.py`
+    ```
+    mkdir data
+    python generate_dummy_data.py
+    ```
     The script accepts command line arguments specifying the number of records in the resulting csv file.
     If not provided it defaults to 20000
 
 8. **Make directory** (for storing the exported csv files)
-    `mkdir exports`
+    ```
+    mkdir exports
+    ```
 
 9. **Run the development server**
-    `python manage.py runserver`
+    ```
+    python manage.py runserver
+    ```
 
 ## Building and running the docker container
-    `docker-compose up --build`
+    ```
+    docker-compose up --build
+    ```
