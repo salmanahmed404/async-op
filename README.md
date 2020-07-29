@@ -95,6 +95,12 @@ Atlan Collect​ is a data collection platform that is being used by customers i
     ```
 
 ## Building and running the docker container
+1. **Clone the repository**
+    ```
+    git clone [repository_url]
+    ``` 
+
+2. Build and run
     ```
     docker-compose up --build
     ```
