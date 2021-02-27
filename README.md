@@ -38,7 +38,7 @@ RESTful API(s) for asynchronous file upload related operations. It implements st
 ## Running Locally (Development)
 1. **Clone the repository**
     ```
-    git clone [repository_url]
+    git clone https://github.com/salmanahmed404/async-op.git
     ```
 
 2. **Create and activate virtual environment**
