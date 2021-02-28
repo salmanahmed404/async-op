@@ -1,5 +1,5 @@
-## Description
-RESTful API(s) for asynchronous file upload related operations. It implements start, stop, pause and terminate file upload functionalities. It has been containerized using Docker for easy portability.
+## Async-op
+Async-op is a set of RESTful API(s) for asynchronous file upload related operations. It implements start, stop, pause and terminate file upload functionalities. It has been containerized using Docker for easy portability.
 
 ## Technology Stack Used
 - DjangoREST framework (APIs)
